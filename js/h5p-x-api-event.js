@@ -224,6 +224,18 @@ H5P.XAPIEvent.prototype.setActor = function () {
 };
 
 /**
+ * Set the course. courseId and courseType will be added automatically.
+ */
+H5P.XAPIEvent.prototype.setCourse = function () {
+  if (H5PIntegration.course !== undefined) {
+    this.data.statement.course = {
+      'courseId': H5PIntegration.course.courseId,
+      'courseType': H5PIntegration.course.courseType,
+    };
+  }
+};
+
+/**
  * Get the max value of the result - score part of the statement
  *
  * @returns {number}

@@ -39,6 +39,7 @@ H5P.EventDispatcher.prototype.createXAPIEventTemplate = function (verb, extra) {
   var event = new H5P.XAPIEvent();
 
   event.setActor();
+  event.setCourse();
   event.setVerb(verb);
   if (extra !== undefined) {
     for (var i in extra) {
