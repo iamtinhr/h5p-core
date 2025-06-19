@@ -231,6 +231,7 @@ H5P.XAPIEvent.prototype.setCourse = function () {
     this.data.statement.course = {
       'courseId': H5PIntegration.course.courseId,
       'courseType': H5PIntegration.course.courseType,
+      'activityId': H5PIntegration.course.activityId,
     };
   }
 };
@@ -261,6 +262,10 @@ H5P.XAPIEvent.prototype.getCourseId = function () {
 
 H5P.XAPIEvent.prototype.getCourseType = function () {
   return this.getVerifiedStatementValue(['course', 'courseType']);
+};
+
+H5P.XAPIEvent.prototype.getActivityId = function () {
+  return this.getVerifiedStatementValue(['course', 'activityId']);
 };
 
 /**

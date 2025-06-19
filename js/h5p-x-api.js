@@ -116,7 +116,8 @@ H5P.xAPICompletedListener = function (event) {
     var maxScore = event.getMaxScore();
     var courseId = event.getCourseId();
     var courseType = event.getCourseType();
+    var activityId = event.getActivityId();
     var contentId = event.getVerifiedStatementValue(['object', 'definition', 'extensions', 'http://h5p.org/x-api/h5p-local-content-id']);
-    H5P.setFinished(courseId, courseType, contentId, score, maxScore);
+    H5P.setFinished(courseId, courseType, activityId, contentId, score, maxScore);
   }
 };

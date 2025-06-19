@@ -2213,6 +2213,7 @@ H5P.shuffleArray = function (array) {
  *   Will be removed march 2016
  * @param {number} courseId
  * @param {number} courseType
+ * @param {number} activityId
  * @param {number} contentId
  *   Identifies the content
  * @param {number} score
@@ -2222,7 +2223,7 @@ H5P.shuffleArray = function (array) {
  * @param {number} [time]
  *   Reported time consumption/usage
  */
-H5P.setFinished = function (courseId, courseType, contentId, score, maxScore, time) {
+H5P.setFinished = function (courseId, courseType, activityId, contentId, score, maxScore, time) {
   var validScore = typeof score === 'number' || score instanceof Number;
   if (validScore && H5PIntegration.postUserStatistics === true) {
     /**
@@ -2240,6 +2241,7 @@ H5P.setFinished = function (courseId, courseType, contentId, score, maxScore, ti
     const data = {
       courseId: courseId,
       courseType: courseType,
+      activityId: activityId,
       contentId: contentId,
       score: score,
       maxScore: maxScore,
