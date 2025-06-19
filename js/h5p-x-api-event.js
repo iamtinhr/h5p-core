@@ -255,6 +255,14 @@ H5P.XAPIEvent.prototype.getScore = function () {
   return this.getVerifiedStatementValue(['result', 'score', 'raw']);
 };
 
+H5P.XAPIEvent.prototype.getCourseId = function () {
+  return this.getVerifiedStatementValue(['course', 'courseId']);
+};
+
+H5P.XAPIEvent.prototype.getCourseType = function () {
+  return this.getVerifiedStatementValue(['course', 'courseType']);
+};
+
 /**
  * Get content xAPI ID.
  *

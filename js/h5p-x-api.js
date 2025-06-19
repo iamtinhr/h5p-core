@@ -114,7 +114,9 @@ H5P.xAPICompletedListener = function (event) {
   if ((event.getVerb() === 'completed' || event.getVerb() === 'answered') && !event.getVerifiedStatementValue(['context', 'contextActivities', 'parent'])) {
     var score = event.getScore();
     var maxScore = event.getMaxScore();
+    var courseId = event.getCourseId();
+    var courseType = event.getCourseType();
     var contentId = event.getVerifiedStatementValue(['object', 'definition', 'extensions', 'http://h5p.org/x-api/h5p-local-content-id']);
-    H5P.setFinished(contentId, score, maxScore);
+    H5P.setFinished(courseId, courseType, contentId, score, maxScore);
   }
 };

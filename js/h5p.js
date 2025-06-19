@@ -141,25 +141,25 @@ H5P.init = function (target) {
     // Check if we should add and display a fullscreen button for this H5P.
     if (contentData.fullScreen == 1 && H5P.fullscreenSupported) {
       H5P.jQuery(
-        '<div class="h5p-content-controls">' +
+          '<div class="h5p-content-controls">' +
           '<div role="button" ' +
-                'tabindex="0" ' +
-                'class="h5p-enable-fullscreen" ' +
-                'aria-label="' + H5P.t('fullscreen') + '" ' +
-                'title="' + H5P.t('fullscreen') + '">' +
+          'tabindex="0" ' +
+          'class="h5p-enable-fullscreen" ' +
+          'aria-label="' + H5P.t('fullscreen') + '" ' +
+          'title="' + H5P.t('fullscreen') + '">' +
           '</div>' +
-        '</div>')
-        .prependTo($container)
+          '</div>')
+          .prependTo($container)
           .children()
           .click(function () {
             H5P.fullScreen($container, instance);
           })
-        .keydown(function (e) {
-          if (e.which === 32 || e.which === 13) {
-            H5P.fullScreen($container, instance);
-            return false;
-          }
-        })
+          .keydown(function (e) {
+            if (e.which === 32 || e.which === 13) {
+              H5P.fullScreen($container, instance);
+              return false;
+            }
+          })
       ;
     }
 
@@ -212,6 +212,7 @@ H5P.init = function (target) {
     // Handle events when the user finishes the content. Useful for logging exercise results.
     H5P.on(instance, 'finish', function (event) {
       if (event.data !== undefined) {
+        console.log('12', event.data)
         H5P.setFinished(contentId, event.data.score, event.data.maxScore, event.data.time);
       }
     });
@@ -377,7 +378,7 @@ H5P.init = function (target) {
     const contentId = $iframe.data('content-id');
     const contentData = H5PIntegration.contents['cid-' + contentId];
     const contentLanguage = contentData && contentData.metadata && contentData.metadata.defaultLanguage
-      ? contentData.metadata.defaultLanguage : 'en';
+        ? contentData.metadata.defaultLanguage : 'en';
 
     const writeDocument = function () {
       iframe.contentDocument.open();
@@ -422,11 +423,11 @@ H5P.getHeadTags = function (contentId) {
   };
 
   return '<base target="_parent">' +
-         createStyleTags(H5PIntegration.core.styles) +
-         createStyleTags(H5PIntegration.contents['cid-' + contentId].styles) +
-         createScriptTags(H5PIntegration.core.scripts) +
-         createScriptTags(H5PIntegration.contents['cid-' + contentId].scripts) +
-         '<script>H5PIntegration = window.parent.H5PIntegration; var H5P = H5P || {}; H5P.externalEmbed = false;</script>';
+      createStyleTags(H5PIntegration.core.styles) +
+      createStyleTags(H5PIntegration.contents['cid-' + contentId].styles) +
+      createScriptTags(H5PIntegration.core.scripts) +
+      createScriptTags(H5PIntegration.contents['cid-' + contentId].scripts) +
+      '<script>H5PIntegration = window.parent.H5PIntegration; var H5P = H5P || {}; H5P.externalEmbed = false;</script>';
 };
 
 /**
@@ -1053,35 +1054,35 @@ H5P.Dialog = function (name, title, content, $element, $returnElement) {
                                 <div class="h5p-close" role="button" tabindex="0" aria-label="' + H5P.t('close') + '" title="' + H5P.t('close') + '"></div>\
                               </div>\
                             </div>')
-    .insertAfter($element)
-    .click(function (e) {
-      if (e && e.originalEvent && e.originalEvent.preventClosing) {
-        return;
-      }
+      .insertAfter($element)
+      .click(function (e) {
+        if (e && e.originalEvent && e.originalEvent.preventClosing) {
+          return;
+        }
 
-      self.close();
-    })
-    .children('.h5p-inner')
+        self.close();
+      })
+      .children('.h5p-inner')
       .click(function (e) {
         e.originalEvent.preventClosing = true;
       })
       .find('.h5p-close')
-        .click(function () {
+      .click(function () {
+        self.close();
+      })
+      .keypress(function (e) {
+        if (e.which === 13 || e.which === 32) {
           self.close();
-        })
-        .keypress(function (e) {
-          if (e.which === 13 || e.which === 32) {
-            self.close();
-            return false;
-          }
-        })
-        .end()
-      .find('a')
-        .click(function (e) {
-          e.stopPropagation();
-        })
+          return false;
+        }
+      })
       .end()
-    .end();
+      .find('a')
+      .click(function (e) {
+        e.stopPropagation();
+      })
+      .end()
+      .end();
 
   /**
    * Opens the dialog.
@@ -1318,15 +1319,15 @@ H5P.openReuseDialog = function ($element, contentData, library, instance, conten
       instance.triggerXAPI('copied');
       dialog.close();
       H5P.attachToastTo(
-        H5P.jQuery('.h5p-content:first')[0],
-        H5P.t('contentCopied'),
-        {
-          position: {
-            horizontal: 'centered',
-            vertical: 'centered',
-            noOverflowX: true
+          H5P.jQuery('.h5p-content:first')[0],
+          H5P.t('contentCopied'),
+          {
+            position: {
+              horizontal: 'centered',
+              vertical: 'centered',
+              noOverflowX: true
+            }
           }
-        }
       );
     });
     H5P.trigger(instance, 'resize');
@@ -1898,7 +1899,7 @@ H5P.MediaCopyright = function (copyright, labels, order, extraFields) {
  * @param {string} source
  * @param {number} width
  * @param {number} height
- * @param {string} alt 
+ * @param {string} alt
  *  alternative text for the thumbnail
  */
 H5P.Thumbnail = function (source, width, height, alt) {
@@ -2210,6 +2211,8 @@ H5P.shuffleArray = function (array) {
  * @deprecated
  *   Do not use this function directly, trigger the finish event instead.
  *   Will be removed march 2016
+ * @param {number} courseId
+ * @param {number} courseType
  * @param {number} contentId
  *   Identifies the content
  * @param {number} score
@@ -2219,7 +2222,7 @@ H5P.shuffleArray = function (array) {
  * @param {number} [time]
  *   Reported time consumption/usage
  */
-H5P.setFinished = function (contentId, score, maxScore, time) {
+H5P.setFinished = function (courseId, courseType, contentId, score, maxScore, time) {
   var validScore = typeof score === 'number' || score instanceof Number;
   if (validScore && H5PIntegration.postUserStatistics === true) {
     /**
@@ -2235,6 +2238,8 @@ H5P.setFinished = function (contentId, score, maxScore, time) {
 
     // Post the results
     const data = {
+      courseId: courseId,
+      courseType: courseType,
       contentId: contentId,
       score: score,
       maxScore: maxScore,
@@ -2243,9 +2248,9 @@ H5P.setFinished = function (contentId, score, maxScore, time) {
       time: time
     };
     H5P.jQuery.post(H5PIntegration.ajax.setFinished, data)
-      .fail(function () {
-        H5P.offlineRequestQueue.add(H5PIntegration.ajax.setFinished, data);
-      });
+        .fail(function () {
+          H5P.offlineRequestQueue.add(H5PIntegration.ajax.setFinished, data);
+        });
   }
 };
 
@@ -2343,11 +2348,11 @@ H5P.createTitle = function (rawTitle, maxLength) {
     maxLength = 60;
   }
   var title = H5P.jQuery('<div></div>')
-    .text(
-      // Strip tags
-      rawTitle.replace(/(<([^>]+)>)/ig,"")
-    // Escape
-    ).text();
+      .text(
+          // Strip tags
+          rawTitle.replace(/(<([^>]+)>)/ig,"")
+          // Escape
+      ).text();
   if (title.length > maxLength) {
     title = title.substr(0, maxLength - 3) + '...';
   }
@@ -2577,7 +2582,7 @@ H5P.createTitle = function (rawTitle, maxLength) {
   H5P.getContentForInstance = function (contentId) {
     var key = 'cid-' + contentId;
     var exists = H5PIntegration && H5PIntegration.contents &&
-                 H5PIntegration.contents[key];
+        H5PIntegration.contents[key];
 
     return exists ? H5PIntegration.contents[key] : undefined;
   };
@@ -2720,7 +2725,7 @@ H5P.createTitle = function (rawTitle, maxLength) {
         }
         return path.substr(0, prefix.length) === prefix ? path : prefix + path;
       }
-      
+
       return path; // Will automatically be looked for in tmp folder
     });
 
