@@ -1,5 +1,5 @@
 {
-    "name": "tinhr/h5p-core",
+    "name": "h5p/h5p-core",
     "type": "library",
     "description": "H5P Core functionality in PHP",
     "keywords": ["h5p","hvp","interactive","content","quiz"],
