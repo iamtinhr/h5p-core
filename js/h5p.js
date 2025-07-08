@@ -1291,20 +1291,20 @@ H5P.buildMetadataCopyrights = function (metadata) {
 H5P.openReuseDialog = function ($element, contentData, library, instance, contentId) {
   let html = '';
   if (contentData.displayOptions.export) {
-    html += '<button type="button" class="h5p-big-button h5p-download-button"><div class="h5p-button-title">Download as an .h5p file</div><div class="h5p-button-description">.h5p files may be uploaded to any web-site where H5P content may be created.</div></button>';
+    html += '<button type="button" class="h5p-big-button h5p-download-button"><div class="h5p-button-title">' + H5P.t('download_h5p') + '</div><div class="h5p-button-description">' + H5P.t('upload_info') + '</div></button>';
   }
   if (contentData.displayOptions.export && contentData.displayOptions.copy) {
     html += '<div class="h5p-horizontal-line-text"><span>or</span></div>';
   }
   if (contentData.displayOptions.copy) {
-    html += '<button type="button" class="h5p-big-button h5p-copy-button"><div class="h5p-button-title">Copy content</div><div class="h5p-button-description">Copied content may be pasted anywhere this content type is supported on this website.</div></button>';
+    html += '<button type="button" class="h5p-big-button h5p-copy-button"><div class="h5p-button-title">' + H5P.t('copy_content') + '</div><div class="h5p-button-description">' + H5P.t('copy_info') + '</div></button>';
   }
 
   const dialog = new H5P.Dialog('reuse', H5P.t('reuseContent'), html, $element);
 
   // Selecting embed code when dialog is opened
   H5P.jQuery(dialog).on('dialog-opened', function (e, $dialog) {
-    H5P.jQuery('<a href="https://h5p.org/node/442225" target="_blank">More Info</a>').click(function (e) {
+    H5P.jQuery('<a href="https://h5p.org/node/442225" target="_blank">' + H5P.t('more_info') + '</a>').click(function (e) {
       e.stopPropagation();
     }).appendTo($dialog.find('h2'));
     $dialog.find('.h5p-download-button').click(function () {
